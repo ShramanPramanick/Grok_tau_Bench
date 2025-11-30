@@ -64,4 +64,4 @@ Please contact `spraman3@jhu.edu` for any issues regarding this github repositor
 
 ## Acknowledgement
 
-The codebase for this work is built on the [tau-bench](https://github.com/sierra-research/tau-bench) repository. We would like to thank the respective authors for their contribution
+The codebase for this work is built on the [tau-bench](https://github.com/sierra-research/tau-bench) repository. We would like to thank the authors for their contribution

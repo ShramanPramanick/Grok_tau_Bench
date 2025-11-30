@@ -32,8 +32,8 @@ python run.py --agent-strategy tool-calling --env airline --model grok-4-fast-no
 
 #### How to run different evaluation settings?
 1. Change `--model` to evaluate different Grok variants, and vary `--num-trials` to ablate the value of `k` in the `Pass^k` metric.
-2. Change `--agent-strategy` to `react`, `act` or `few-shot` for correcponding experiments. Use `--few-shot-displays-path few_shot_data/MockAirlineDomainEnv-few_shot.jsonl` as an additional argument for few-shot evaluation strategy.
-
+2. Use `--env retail` to evaluate on tau-Retail.
+3. Change `--agent-strategy` to `react`, `act` or `few-shot` for correcponding experiments. Use `--few-shot-displays-path few_shot_data/MockAirlineDomainEnv-few_shot.jsonl` as an additional argument for few-shot evaluation strategy.
 
 
 ## Categorize Errors

@@ -46,3 +46,14 @@ python scripts/classify_error.py results/tool-calling-grok-4-1-fast-reasoning-0.
 ```
 
 Please look into other files in the `Results` directory for corresponding results.
+
+
+## Trajectory Evaluation
+
+To run the judge LLM for trajectory evaluation, please use the following scripts:
+
+```bash
+python scripts/evaluate_trajectory.py --input_file results/tool-calling-grok-4-1-fast-reasoning-0.0_range_0--1_user-grok-4-1-fast-reasoning-llm_1129154012.json --output_dir judged
+```
+
+Likewise, look into other files in the `Results` directory for corresponding results.

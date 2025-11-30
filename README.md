@@ -1,62 +1,25 @@
-# τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains
-
-**❗News**: We have released [τ²-bench](https://github.com/sierra-research/tau2-bench) as an extension of $\tau$-bench. $\tau^2$-bench includes code fixes and an additional `telecom` domain focusing on troubleshooting scenarios. Please use the $\tau^2$-bench as the latest version of this benchmark.
-
-**Paper**:
-* [τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains](https://arxiv.org/abs/2406.12045)
-* [τ²-Bench: Evaluating Conversational Agents in a Dual-Control Environment](https://arxiv.org/abs/2506.07982)
-
-We propose $\tau$-bench, a benchmark emulating dynamic conversations between a user (simulated by language models) and a language agent provided with domain-specific API tools and policy guidelines.
-
-## Leaderboard
-
-### Airline
-
-| Strategy       | Pass^1 | Pass^2 | Pass^3 | Pass^4 |
-| -------------- | ------ | ------ | ------ | ------ |
-| [TC (claude-3-5-sonnet-20241022)](https://www.anthropic.com/news/3-5-models-and-computer-use)      | **0.460**     | **0.326**     | **0.263**     | **0.225**     |
-| [TC (gpt-4o)](https://platform.openai.com/docs/guides/function-calling)     | 0.420     | 0.273     | 0.220     | 0.200     |
-| [TC (claude-3-5-sonnet-20240620)](https://docs.anthropic.com/en/docs/build-with-claude/tool-use)      | 0.360     | 0.224     | 0.169     | 0.139     |
-| [TC (mistral-large-2407)](https://docs.mistral.ai/capabilities/function_calling/)     | ??     | ??     | ??     | ??     |
-| [TC (gpt-4o-mini)](https://platform.openai.com/docs/guides/function-calling)     | 0.225     | 0.140     | 0.110     | 0.100     |
-| [Act](https://arxiv.org/abs/2210.03629) (gpt-4o)     | 0.365 | 0.217 | 0.160 | 0.140     |
-| [ReAct](https://arxiv.org/abs/2210.03629) (gpt-4o)     | 0.325 | 0.233 | 0.185 | 0.160     |
-
-### Retail
-
-| Strategy       | Pass^1 | Pass^2 | Pass^3 | Pass^4 |
-| -------------- | ------ | ------ | ------ | ------ |
-| [TC (claude-3-5-sonnet-20241022)](https://www.anthropic.com/news/3-5-models-and-computer-use)      | **0.692**     | **0.576**     | **0.509**     | **0.462**     |
-| [TC (gpt-4o)](https://platform.openai.com/docs/guides/function-calling)     | 0.604     | 0.491     | 0.430     | 0.383     |
-| [TC (claude-3-5-sonnet-20240620)](https://docs.anthropic.com/en/docs/build-with-claude/tool-use)      | 0.626     | 0.506     | 0.435     | 0.387     |
-| [TC (mistral-large-2407)](https://docs.mistral.ai/capabilities/function_calling/)     | ??     | ??     | ??     | ??     |
-| [TC (gpt-4o-mini)](https://platform.openai.com/docs/guides/function-calling)     | ??     | ??     | ??     | ??     |
-| [Act](https://arxiv.org/abs/2210.03629) (gpt-4o)     | ??     | ??     | ??     | ??     |
-| [ReAct](https://arxiv.org/abs/2210.03629) (gpt-4o)     | ??     | ??     | ??     | ??     |
-
-*TC = `tool-calling` strategy (the function-calling strategy reported in the paper)
+# Evaluating Grok on τ-bench
 
 ## Setup
 
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/sierra-research/tau-bench && cd ./tau-bench
+git clone https://github.com/ShramanPramanick/Grok_tau_Bench.git && cd ./Grok_tau_Bench
 ```
 
-2. Install from source (which also installs required packages):
+2. Create a conda environment and install from source (which also installs required packages):
 
 ```bash
+conda create --name tau_bench python=3.11
+conda activate tau_bench
 pip install -e .
 ```
 
-3. Set up your OpenAI / Anthropic / Google / Mistral / AnyScale API keys as environment variables.
+3. Set up your XAI API key as environment variables.
 
 ```bash
-OPENAI_API_KEY=...
-ANTHROPIC_API_KEY=...
-GOOGLE_API_KEY=...
-MISTRAL_API_KEY=...
+XAI_API_KEY=...
 ```
 
 ## Run
@@ -64,18 +27,13 @@ MISTRAL_API_KEY=...
 Run a tool-calling agent on the τ-retail environment:
 
 ```bash
-python run.py --agent-strategy tool-calling --env retail --model gpt-4o --model-provider openai --user-model gpt-4o --user-model-provider openai --user-strategy llm --max-concurrency 10
+python run.py --agent-strategy tool-calling --env airline --model grok-4-fast-non-reasoning --model-provider xai --user-model grok-4-fast-non-reasoning --user-model-provider xai --user-strategy llm --max-concurrency 5 --num-trials 1
 ```
 
-Set max concurrency according to your API limit(s).
+Change `--model` to evaluate different Grok variants, and vary `--num-trials` to ablate the value of `k` in the `Pass^k` metric.
+Change `--agent-strategy` to `react`, `act` or `few-shot` for correcponding experiments. Use `--few-shot-displays-path few_shot_data/MockAirlineDomainEnv-few_shot.jsonl` as an additional argument for few-shot evaluation strategy.
 
-To run specific tasks, use the `--task-ids` flag. For example:
 
-```bash
-python run.py --agent-strategy tool-calling --env retail --model gpt-4o --model-provider openai --user-model gpt-4o --user-model-provider openai --user-strategy llm --max-concurrency 10 --task-ids 2 4 6
-```
-
-This command will run only the tasks with IDs 2, 4, and 6.
 
 ## User simulators
 

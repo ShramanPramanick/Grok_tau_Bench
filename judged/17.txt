@@ -1,0 +1,15 @@
+### Evaluation of Tool-Use Trajectory
+
+**Tool Calls Analysis:**
+- `get_user_details` (user_id: liam_khan_2521): Correct – Necessary to retrieve user profile and reservations after user provided ID, aligning with domain rules for modifications.
+- `get_reservation_details` (reservation_id: 4NQLHD): Correct – Essential to confirm the specific reservation matching the goal (IAH-SEA on May 23), as required for any flight modification.
+- `search_onestop_flight` (IAH-SEA, 2024-05-24): Correct – Needed to check availability and prices for date shift to May 24, supporting the primary goal.
+- `search_direct_flight` (SEA-JFK, 2024-05-26): Correct – Verifies return leg availability/pricing for business upgrade, ensuring uniform cabin feasibility.
+- `search_direct_flight` (JFK-IAH, 2024-05-27): Correct – Completes return leg check for upgrade pricing.
+- `search_direct_flight` (IAH-SEA, 2024-05-24): Unnecessary – No direct flights exist (result: []), but call was exploratory for cheaper options; doesn't violate rules but extends trajectory without advancing goal.
+- `search_onestop_flight` (IAH-SEA, 2024-05-23): Correct – Checks original date for business upgrade without shift, responding to user's persistence.
+- `search_onestop_flight` (IAH-SEA, 2024-05-25): Unnecessary – Searches alternative date (May 25) after user suggested it, but deviates from strict May 24 goal; helpful for persistence but not core to intent.
+
+**Overall Assessment:** The trajectory is mostly optimal, correctly identifying the reservation, verifying availability/pricing for date shift and upgrades, and respecting domain constraints (e.g., uniform cabin, no partial upgrades, confirmation before changes). It supports user persistence and budget checks without violations. Minor penalties for two unnecessary searches (exploratory alternatives) and a longer conversation due to failed upgrade attempts, but no incorrect calls.
+
+**Score: 4**

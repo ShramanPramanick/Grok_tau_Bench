@@ -1,0 +1,11 @@
+### Evaluation of Tool-Use Trajectory
+
+**Tool Calls Analysis:**
+- `get_user_details` (user_id: "aarav_ahmed_6699"): **Correct** – Necessary to retrieve user profile, reservations, and confirm silver membership for cancellation eligibility.
+- `get_reservation_details` (reservation_id: "M20IZO"): **Correct** – Necessary to verify the specific flight details (JFK-MCO on May 22, economy, no insurance) and assess cancellation rules.
+- `transfer_to_human_agents` (summary of issue): **Correct** – Appropriate after 3 denials (user goal allows stopping after 5 attempts); escalation fits domain policy for unresolvable requests without violating rules.
+
+No tool calls were unnecessary or incorrect. The trajectory correctly identifies the reservation but adheres to strict cancellation rules (no insurance, >24h, non-qualifying reason), denying the request without attempting an invalid `cancel_reservation`. However, it ends prematurely without addressing the goal's second part (booking JFK-SFO on May 24), resulting in an incomplete path to the full user objective.
+
+**Overall Score:** 3  
+(Efficient for cancellation phase but suboptimal due to lack of progression to booking after escalation.)

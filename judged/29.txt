@@ -1,0 +1,10 @@
+### Evaluation of Tool-Use Trajectory
+
+**Tool Calls Analysis:**
+- `get_user_details` (user_id: "amelia_davis_8890"): **Correct** – Necessary to retrieve the user's profile and list of reservation IDs, aligning with the goal of identifying upcoming solo-passenger flights.
+- `get_reservation_details` (for each of 7 reservation IDs: 8C8K4E, UDMOP1, XAZ3C0, LU15PA, MSJ4OA, I6M8JQ, 4XGCCM): **Correct** – Necessary and appropriate to inspect all reservations for passenger count, upcoming status, and eligibility for cancellation, directly supporting the goal. No domain violations (e.g., no premature cancel calls without reason/confirmation).
+- No further tool calls (e.g., no `cancel_reservation` attempted): **Correct** – Policy prohibits cancellation of the qualifying reservation (UDMOP1: basic economy, no insurance, >24 hours old, change of plans reason), so trajectory appropriately halts and transfers to human agent instead of violating rules.
+
+**Overall Assessment:** The trajectory is efficient and policy-compliant: it gathers required details to identify the target reservation, explains constraints, and escalates correctly without unnecessary or incorrect actions. Only one qualifying reservation found, but full checks ensure completeness. Minor length from multiple details calls is justified.
+
+**Score: 5**

@@ -1,0 +1,17 @@
+### Evaluation of Tool-Use Trajectory
+
+**User Goal Analysis**: The user (role-playing as Mei Brown) aims to complain about a delayed flight, assert Gold status, demand maximum compensation (preferably refund to original payment), reject initial offers, and be insistent without immediately accepting changes/cancellations.
+
+**Domain Rules Summary**: Airline policy requires verifying user details, reservations, and flight status before actions like compensation. Compensation for delays is limited to $50/passenger certificate (for Gold/silver/business/insured) *only after* change/cancellation; no direct refunds for delays. Membership and reservations must be confirmed via tools. Escalation to human agents is required if unresolvable within policy/tools.
+
+**Tool Calls Breakdown**:
+- `get_user_details` (user_id: "mei_brown_7075"): **Correct** – Necessary to verify profile (membership, reservations, payments) for complaint handling and compensation eligibility.
+- `search_direct_flight` (origin: PHX, destination: SEA, date: 2024-05-15): **Unnecessary** – No rebooking requested; user focuses on compensation, not searching alternatives. Doesn't violate intent but adds irrelevant steps.
+- `get_reservation_details` (for "DB1Y70"): **Unnecessary** – This reservation (PHX-CLT, future date) is unrelated to the delayed HAT045 (PHX-SEA today); wastes trajectory length.
+- `get_reservation_details` (for "MUGYUB"): **Unnecessary** – Unrelated reservation (MIA-EWR, future); not needed for goal.
+- `get_reservation_details` (for "3JA7XV"): **Correct** – Essential; identifies the relevant reservation containing HAT045, confirms business class, passengers, and payment for compensation assessment.
+- `transfer_to_human_agents` (with summary): **Correct** – Appropriate after user insists on unresolvable demands (e.g., direct refund + high voucher without change/cancel, membership dispute); policy mandates transfer for out-of-scope issues.
+
+**Overall Assessment**: The trajectory correctly verifies key details and adheres to policy by offering limited compensation tied to actions, rejecting invalid demands, and escalating appropriately. However, it includes unnecessary searches and checks of irrelevant reservations, lengthening the process without advancing the goal. No incorrect calls (none violate intent or rules). Near-optimal but inefficient.
+
+**Score**: 4

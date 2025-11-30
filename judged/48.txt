@@ -1,0 +1,18 @@
+### Evaluation of Tool-Use Trajectory
+
+**User Goal**: Change flight date for reservation EUJUY6 (postpone 2 days due to bereavement), effectively requiring modification or rebooking since direct changes are restricted.
+
+**Domain Rules Summary**: Basic economy reservations cannot be modified (including dates). Cancellation requires eligibility (e.g., insurance for health reasons, but past flights block full cancellation). Rebooking new flights is allowed, following booking protocols: obtain user ID, search flights, confirm details (passengers, payments, baggage, insurance), and book only after explicit "yes" confirmation. Tools must be used one at a time; no updates without confirmation.
+
+**Tool Calls Analysis**:
+1. **get_reservation_details (EUJUY6)**: Correct – Necessary to verify reservation details (cabin, dates, status) before assessing modification feasibility.
+2. **get_user_details (lucas_brown_4047)**: Correct – Necessary after bereavement mention to confirm membership (silver, enabling better baggage/insurance options) and payment methods for rebooking.
+3. **search_direct_flight (ORD→LAS, 2024-05-16)**: Correct – Necessary to find available flights for rebooking on new outbound date.
+4. **search_onestop_flight (ORD→LAS, 2024-05-16)**: Correct – Follow-up after direct search failed; appropriate for finding viable one-stop options.
+5. **search_direct_flight (LAS→ORD, 2024-05-18)**: Correct – Necessary for return leg.
+6. **search_onestop_flight (LAS→ORD, 2024-05-18)**: Correct – Follow-up after direct failed.
+7. **book_reservation (new details for rebooking)**: Correct – Necessary and appropriate after user confirmation ("YES" with specifics); includes all required params (user ID, flights, passenger, payment, baggage=0, insurance=yes) without violating rules (e.g., uses profile payment, silver baggage allowance respected).
+
+All calls are necessary, sequential, and align with domain constraints (no modification attempt on basic economy; proper confirmation before booking). No unnecessary or incorrect calls; trajectory is efficient (7 calls total, goal achieved via rebooking).
+
+**Overall Score**: 5

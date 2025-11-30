@@ -1,0 +1,11 @@
+### Evaluation of Tool-Use Trajectory
+
+**Tool Calls Breakdown:**
+- `get_user_details` (user_id: "noah_muller_9847"): Correct and necessary. Required to verify user profile (e.g., membership tier, payment methods, reservations) at the start of booking, aligning with domain rules for booking/modify actions.
+- `get_reservation_details` (reservation_id: "SDZQKO"): Correct and necessary. Fetches details of the most recent reservation after user expresses frustration, enabling agent to confirm delay and offer assistance per refund policy (gold member eligibility for compensation).
+- `get_reservation_details` (reservation_id: "4OG6T3"): Unnecessary. The prior reservation was already listed in user details; querying it adds no value to handling the "most recent" complaint and extends the trajectory without advancing the goal.
+- `send_certificate` (user_id: "noah_muller_9847", amount: 50): Incorrect. Violates domain refund policy—certificate for delays requires $50 × number of passengers (2 in actual reservation), confirmation of facts (no explicit delay status verified via tools), and an update/cancel action (none occurred). Amount mismatches user's test (3 passengers), and it's premature without user confirmation.
+
+**Overall Assessment:** The trajectory starts strong on booking but correctly pivots to reservation handling per user goal. However, unnecessary duplicate query and policy-violating compensation call introduce errors, making it suboptimal and non-compliant with domain constraints. No flight booking completes due to unavailability, but tools align partially with the frustration pivot and test setup.
+
+**Score:** 2

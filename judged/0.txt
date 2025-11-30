@@ -1,0 +1,15 @@
+### Evaluation of Tool-Use Trajectory
+
+**Tool Calls Assessed:**
+- `get_user_details` (user_id: mia_li_3668): **Correct** – Necessary to retrieve user profile (name, DOB, payments, membership) before proceeding with booking, aligning with domain rules requiring profile-based actions.
+- `search_direct_flight` (origin: JFK, destination: SEA, date: 2024-05-20): **Correct** – Necessary to check direct options first, per user preference for directs; filters for economy and availability.
+- `search_onestop_flight` (origin: JFK, destination: SEA, date: 2024-05-20): **Correct** – Necessary after directs fail time constraint (≥11am EST); identifies viable one-stop options and selects cheapest ($255 total).
+- `book_reservation` (first call, payments: $250 + $50 = $300): **Incorrect** – Violates domain constraint on payment accuracy (total price $255); overpays by $45 using second certificate unnecessarily, ignoring user intent to use certificates optimally without excess.
+- `book_reservation` (second call, payments: $250 + $5 = $255): **Correct** – Necessary retry after error; accurately matches total price, uses larger certificate first ($250), second for remainder ($5), 3 bags (all free for gold member), no insurance, and selected flights/passenger.
+
+**Overall Assessment:** Trajectory is mostly efficient and goal-aligned (books correct flight, handles preferences like time, economy, bags, payments), but the initial booking error introduces an unnecessary retry and violates payment precision rules, lengthening the process without user confirmation on adjustment. No other domain violations (e.g., obtained confirmation via "YES", used profile data).
+
+**Score: 3**
+
+## Final Score
+3

@@ -1,0 +1,11 @@
+### Evaluation of Tool-Use Trajectory
+
+**Tool Calls Analysis:**
+- `get_user_details` (user_id: sophia_silva_7557): **Correct** – Necessary to retrieve user profile (name, DOB, payments, reservations) for booking setup and passenger details.
+- `get_reservation_details` (multiple reservation_ids: NM1VX1, KC18K6, S61CZX, H8Q05L, WUNA5K): **Unnecessary** – The policy requires obtaining user ID first, but sequentially querying all reservations (5 calls) is inefficient and violates "one tool call at a time" without user interaction. Only WUNA5K was relevant (May 10 ORD-PHL flight); others were irrelevant, leading to an overly long trajectory.
+- `search_direct_flight` (origin: ORD, destination: PHL, date: 2024-05-26): **Correct** – Necessary to confirm availability of the exact same flight (HAT271) on the new date.
+- `book_reservation` (full booking params for 2 passengers, $348 total): **Correct** – Appropriate for the goal; price under $500, so includes both passengers; matches one-way, economy, no bags/insurance; uses valid payment from profile.
+
+**Overall Assessment:** The trajectory achieves the goal (books exact flight for 2 passengers under budget) but is suboptimal due to excessive, unnecessary reservation lookups, inflating length and violating policy efficiency. No incorrect calls (e.g., no domain violations like unconfirmed booking or wrong passengers), but inefficiency penalizes optimality.
+
+**Score: 3**

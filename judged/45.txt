@@ -1,0 +1,12 @@
+### Evaluation of Tool-Use Trajectory
+
+**Goal Summary**: The user (Noah Muller) is role-playing frustration over a delayed flight in their most recent reservation (SDZQKO), testing the agent's handling of incorrect passenger count claims (insisting on 3 passengers despite actual 2, admitting mistake after 2 assertions). The agent must verify details, adhere to policy (e.g., no passenger number changes, compensation rules for delays), and handle escalation appropriately without violating constraints like unconfirmed updates or proactive compensation.
+
+**Tool Calls Analysis** (from EXECUTED TOOL ACTIONS; full trajectory provides context):
+- `get_user_details` (user_id: "noah_muller_9847"): **Correct**. Necessary to retrieve profile, reservations, and membership (gold tier) to identify the most recent booking and assess eligibility for delay compensation/upgrades.
+- `get_reservation_details` (reservation_id: "4OG6T3"): **Correct**. Appropriate to fetch details of the previous reservation (one of two listed), enabling comparison to confirm the "most recent" (SDZQKO) and check delay status/insurance.
+- `send_certificate` (user_id: "noah_muller_9847", amount: 50): **Incorrect**. Violates domain rules—no confirmed delay in system data (flights "available"), no explicit compensation request, and basic economy with no insurance disqualifies $50/passenger gesture (policy requires silver/gold + insurance/business for delays). Amount implies 1 passenger but ignores user's (incorrect) 3-passenger claim; unconfirmed action breaks pre-confirmation policy.
+
+**Overall Assessment**: The trajectory starts optimally by verifying user/reservation details to inform responses and options (e.g., upgrades, no cancel). However, the premature/unauthorized certificate issuance breaks policy correctness, and the executed actions omit key full-trajectory tools (e.g., re-checks, transfer) that resolved the test appropriately. Unnecessary length in searches (e.g., alternative flights) but no major violations there. Penalizes for incorrect tool and suboptimal handling of compensation.
+
+**Score**: 2

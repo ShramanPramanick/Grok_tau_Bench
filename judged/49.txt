@@ -1,0 +1,12 @@
+### Evaluation of Tool-Use Trajectory
+
+**Tool Calls Breakdown:**
+- `get_reservation_details` (MDCLVA): Correct – Necessary to verify reservation details (e.g., type, insurance, dates) before assessing cancellation eligibility, per domain rules requiring user ID, reservation ID, and reason.
+- `get_user_details` (emma_kim_9957): Correct – Appropriate to confirm membership tier (gold) and prior reservations, addressing user's claim about previous insurance without violating policy.
+- `get_reservation_details` (H1QGCY, 66EEUA, EHGLP3): Correct – Essential to fact-check user's insurance history claim across all listed reservations, ensuring policy-compliant denial.
+- `search_direct_flight` (EWR-CLT, 2024-05-15): Correct – Needed to check flight status (departed, no availability), confirming outbound leg is unusable and blocking whole-reservation cancellation.
+- `transfer_to_human_agents`: Correct – Necessary escalation as request (exception/refund) exceeds AI scope/policy, per rules for unhandleable cases.
+
+**Overall Assessment:** All tool calls are correct and necessary, forming an efficient trajectory: initial verification, targeted fact-checking, status confirmation, and proper handoff. No unnecessary or incorrect actions; adheres strictly to cancellation/modify rules without unauthorized updates. Minimal steps despite user persistence.
+
+**Score:** 5

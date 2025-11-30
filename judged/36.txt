@@ -1,0 +1,8 @@
+### Evaluation of Tool Calls
+- **get_reservation_details (PEP4E0)**: Correct – Necessary to verify the user's claim about insurance on the target reservation.
+- **transfer_to_human_agents**: Incorrect – Violates user intent to avoid transfer and domain policy (transfer only if request cannot be handled); the issue (insurance addition) is explicitly unhandleable per rules, but agent should deny persistently without transferring, as no resolution is possible.
+
+### Overall Assessment
+The trajectory starts appropriately by checking details but deviates by investigating unrelated family reservations (implied in full trajectory, though not in executed list) and ends with an unauthorized transfer, ignoring user insistence. This creates an inefficient, policy-violating path instead of a firm denial.
+
+**Score: 2**

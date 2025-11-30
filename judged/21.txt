@@ -1,0 +1,11 @@
+### Evaluation of Tool-Use Trajectory
+
+**Tool Calls Breakdown:**
+- `get_user_details` (user_id: daiki_lee_6144): Correct and necessary. Required to retrieve user profile and reservations after user provided ID but not reservation ID, aligning with modify flight policy (obtain user ID first).
+- `get_reservation_details` (reservation_id: DF89BM): Correct and necessary. Follows up on user details to identify and confirm the specific JFK May 17 reservation, enabling verification of details like basic_economy status before advising on changes.
+- `search_direct_flight` (origin: JFK, destination: DTW, date: 2024-05-17): Correct and necessary. Directly supports user's request to check nonstop options, providing data to inform alternatives (new booking) while respecting policy limits on basic_economy modifications.
+- `transfer_to_human_agents` (summary of emergency request): Correct and necessary. User's escalation for exception (policy violation for basic_economy flight change) cannot be handled by agent tools; policy mandates transfer for out-of-scope requests.
+
+**Overall Assessment:** All tool calls are correct, necessary, and sequential, forming an efficient trajectory that adheres to domain rules (e.g., no unauthorized modifications, one tool at a time). No unnecessary or incorrect calls; trajectory is concise (4 calls) and goal-aligned, ending in appropriate escalation without violating constraints.
+
+**Score:** 5

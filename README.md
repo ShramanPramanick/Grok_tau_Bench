@@ -22,9 +22,9 @@ pip install -e .
 XAI_API_KEY=...
 ```
 
-## Run
+## Primary Evaluation
 
-Run a tool-calling agent on the τ-retail environment:
+Run a tool-calling agent on the τ-Airline environment:
 
 ```bash
 python run.py --agent-strategy tool-calling --env airline --model grok-4-fast-non-reasoning --model-provider xai --user-model grok-4-fast-non-reasoning --user-model-provider xai --user-strategy llm --max-concurrency 5 --num-trials 1
@@ -35,3 +35,14 @@ python run.py --agent-strategy tool-calling --env airline --model grok-4-fast-no
 2. Change `--agent-strategy` to `react`, `act` or `few-shot` for correcponding experiments. Use `--few-shot-displays-path few_shot_data/MockAirlineDomainEnv-few_shot.jsonl` as an additional argument for few-shot evaluation strategy.
 
 
+
+## Categorize Errors
+
+Run the following scripts to categorize `grok-4-1-fast-reasoning` failure modes into four different distince categories:
+
+```bash
+python scripts/classify_error.py results/tool-calling-grok-4-1-fast-reasoning-0.0_range_0--1_user-grok-4-1-fast-reasoning-llm_1129145530.json -o results/retail_error_classes.json
+python scripts/classify_error.py results/tool-calling-grok-4-1-fast-reasoning-0.0_range_0--1_user-grok-4-1-fast-reasoning-llm_1129154012.json -o results/airline_error_classes.jsonl
+```
+
+Please look into other files in the `Results` directory for corresponding results.

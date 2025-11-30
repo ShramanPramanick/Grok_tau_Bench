@@ -57,3 +57,11 @@ python scripts/evaluate_trajectory.py --input_file results/tool-calling-grok-4-1
 ```
 
 Likewise, look into other files in the `Results` directory for corresponding results.
+
+## Contact
+
+Please contact `spraman3@jhu.edu` for any issues regarding this github repository.
+
+## Acknowledgement
+
+The codebase for this work is built on the [tau-bench](https://github.com/sierra-research/tau-bench) repository. We would like to thank the respective authors for their contribution
